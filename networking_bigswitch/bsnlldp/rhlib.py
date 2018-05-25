@@ -24,7 +24,7 @@ import time
 # constants for RHOSP
 NET_CONF_PATH = "/etc/os-net-config/config.json"
 HIERA_DIR_PATH = "/etc/puppet/hieradata"
-COMPUTE_FILE_PATH = "%s/compute.json" % HIERA_DIR_PATH
+COMPUTE_FILE_PATH = "%s/compute.yaml" % HIERA_DIR_PATH
 SUPPORTED_BOND = ['ovs_bond', 'linux_bond']
 _SYS_CLASS_NET = '/sys/class/net'
 
@@ -63,7 +63,6 @@ utils._is_active_nic = _is_active_nic
 
 def get_bcf_mode():
     """Get bcf deployment mode.
-
     :returns: UNKNOWN, MODE_P_ONLY or MODE_P_V.
     """
     while True:
@@ -94,7 +93,6 @@ def get_mac_str(network_interface):
 
 def get_uplinks_and_chassisid():
     """Get uplinks and chassis_id in RHOSP environment.
-
     :returns: a list of uplinks names and one chassis_id
         which is the first active nic's mac address.
     """

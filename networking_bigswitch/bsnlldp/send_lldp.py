@@ -177,11 +177,8 @@ def validate_num_bits_of_int(int_value, num_bits, name=None):
     mask = pow(2, num_bits) - 1
     if (int_value & mask) != int_value:
         name = name if name else "The integer value"
-        msg = ("{name} must be {num_bits}-bit long. Given: {int_value} "
-               "({hex_value})".format(**{'name': name, 'num_bits': num_bits,
-                                         'int_value': int_value,
-                                         'hex_value': hex(int_value)}))
-        raise ValueError(msg)
+        raise ValueError("%s must be %d-bit long. Given: %d (%s)"
+                % (name, num_bits, int_value, hex(int_value)))
 
 
 def raw_bytes_of_hex_str(hex_str):
@@ -237,8 +234,8 @@ def tlv_of(type_, str_value):
 
 
 def chassis_id_tlv_of(chassis_id, subtype=CHASSIS_ID_LOCALLY_ASSIGNED):
-    return tlv_of(
-        1, raw_bytes_of_int(subtype, 1, "Chassis ID subtype") + chassis_id)
+    return tlv_of(1,
+            raw_bytes_of_int(subtype, 1, "Chassis ID subtype") + chassis_id)
 
 
 def port_id_tlv_of(port_id, subtype=PORT_ID_INTERFACE_ALIAS):
